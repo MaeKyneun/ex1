@@ -1,0 +1,54 @@
+####################ADDS
+core.wsr > DC
+####################DNS
+core.wsr (устанавлиевается автоматически) > у DC адрес dns - ISP > создать записи для всех машин через DNS manager
+####################ntp####################
+###Linux server (ISP)
+apt install chrony -y
+
+systemctl start chrony
+systemctl status chrony
+
+/etc/chrony/chrony.conf 
+allow <ip address FW> #разрешаем FW брать у нас время#
+###Windows server (DC)
+в services и в regedit - сервер должен быть включен
+путь в regedit Computer/HKEY_LOCAL_MACHIN/SYSTEM/CurrentControlSet/services/w32time/TimeProviders/<...>
+w32tm /config /syncfromflags:manual /manualpeerlist:"<ip address ISP - на DC, синхранизация с ISP>"
+###Linux client (all)
+apt install chrony -y
+
+systemctl start chrony
+systemctl status chrony
+
+apt install firewalld -y
+firewall-cmd --add-service=ntp --permanent
+firewall-cmd --reload
+
+/etc/chrony/chrony.conf 
+server <ip address DC> #на всех машинах указываем адрес DC#
+
+chronyc tracking #проверить адрес сервера и, что там все не по 0#
+###Windows client (all)
+w32tm /config /syncfromflags:manual /manualpeerlist:"<ip address DC - на всех ВМ>"
+net stop & start w32tm
+w32tm /config /update
+w32tm /query /source
+####################dhcp####################
+установить роль и настроить по заданию
+проверить client
+####################общий каталог####################
+###DC
+через file and storage services >
+shares > C:/AdminShare (права для everyone)
+проверить что папка ратотает
+###BACK
+apt install samba-client cifs-utils
+mkdir /mnt/adminshare
+mount -t cifs -o username=Administrator,password=P@ssw0rd //<ip address DC>/AdminShare /mnt/adminshare
+####################центр сертификации####################
+##DC
+установить роль AD CS - настроить при загрузке
+##CLI, OUT-CLI
+проверить, что центр чертификации находится в доверенных
+
