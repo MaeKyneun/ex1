@@ -1,0 +1,6 @@
+gre+ipsec - west-front + east-front
+      west-front + fw
+      fw + east front
+nat - то же что и выше
+через firewalld добавить интерфейсы в trusted(gre + int, которые ссмотрят в собственную сеть) и external (сервисы gre, ipsec, int, которые смотрять в gre)
+openvpn на OUT-CLI
