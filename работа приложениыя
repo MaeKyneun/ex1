@@ -1,0 +1,9 @@
+west-front, east-front - nginx
+nginx.conf (upstream backennd {west-back(1-2), east-back(1-2)}
+            server_name app.wsr)
+firewalld (http, https)
+openssl req- nodes -days 365 -newkey rsa:2048 -keyout /etc/*** -out /etc/***
+
+
+west-back(1-2), east-back(1-2) - apache httpd
+index.html(приложение, которое дадут app.wsr)
