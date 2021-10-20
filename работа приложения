@@ -17,8 +17,8 @@ GPO - Core.wsr – создать новый(crt) – Comp… Win… Secu… Pub
     revoked > publish > Delta only
 #Linux#
 west-front, east-front - nginx
-nginx.conf (upstream backennd {west-back(1-2), 
-                               east-back(1-2)}
+nginx.conf (upstream backennd {west-back(1-2) faile_timeout = 20sec, 
+                               east-back(1-2) faile_timeout = 20sec}
             server_name app.wsr)
 firewalld (http, https)
 пейти в графику
