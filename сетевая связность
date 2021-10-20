@@ -9,7 +9,7 @@ gre+ipsec - west-front + east-front
 ipsec > apt install -y libreswan
       /etc/ipsec.conf
       echo "
-      enn encrypted_gre
+      conn encrypted_gre
             auto=start
             authby=secret
             type=tunnel
