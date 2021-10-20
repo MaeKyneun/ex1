@@ -1,9 +1,36 @@
+
+####################сайт####################
+*******с Windows - Windows
+в cmd PowerShell 
+New-SelfSignedCertificate -DnsName www.core.wsr -CertStoreLocation cert:\LocalMachine\My
+Win+R = certlm.smc (Per... Cert... www.core.wsr)
+ПКМ All Task + Export + Export File Format (.PFX) File name: Desktop
+в IIS - добавить сервера FRONT и BACK  - import > Web Hosting
+Edit Site + Bin...
+GPO - Core.wsr – создать новый(crt) – Comp… Win… Secu… Pub… Trusted Root Cert… добавить
+
+
+*******с Windows - Linux
+#Windows# - network AD CS (Cert Autho...)
+сервер - настройки  - Exten > http (+ все галочки)
+    exit module > настройки (галочка)
+    revoked > publish > Delta only
+#Linux#
 west-front, east-front - nginx
-nginx.conf (upstream backennd {west-back(1-2), east-back(1-2)}
+nginx.conf (upstream backennd {west-back(1-2), 
+                               east-back(1-2)}
             server_name app.wsr)
 firewalld (http, https)
-openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /etc/*** -out /etc/***
+пейти в графику
+в cmd 
+    su > cd */conf.d > 
+        openssl req -out csr.csr -new -newkey rsa:2048 -nodes -keyout server.key
+        cat csr.csr > скопировать слова и вставить на сайте ниже + web server (.cer)
+в браузере http://ip address DC\certsrv
 
+cp файл в /home/user/Docu*/certnew.cer
+в cmd cp /home/user/Docu*/certnew.cer */conf.d
+    openssl x509 -inform DER -in /home/user/Downloads/certnew.cer -out */conf.d/server.crt
 
 west-back(1-2), east-back(1-2) - apache httpd
 index.html(приложение, которое дадут app.wsr)
