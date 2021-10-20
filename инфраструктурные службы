@@ -51,4 +51,3 @@ mount -t cifs -o username=Administrator,password=P@ssw0rd //<ip address DC>/Admi
 установить роль AD CS - настроить при загрузке
 ##CLI, OUT-CLI
 проверить, что центр чертификации находится в доверенных
-
