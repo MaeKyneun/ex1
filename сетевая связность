@@ -1,10 +1,9 @@
 nat - порты в ISP добавить в external 
 
-через firewalld добавить интерфейсы в trusted(gre + int, которые ссмотрят в собственную сеть) и external (сервисы gre, ipsec, int, которые смотрять в gre)
+через firewalld добавить интерфейсы в trusted(gre + int, которые ссмотрят в собственную сеть) и external (сервисы gre, ipsec, int,http, https, openvpn которые смотрять в gre)
+на некоторых машинах потребуетс выключить appormor, selinux
 
-gre+ipsec - west-front + east-front
-      west-front + fw
-      fw + east front
+gre+ipsec
 
 ipsec > apt install -y libreswan
       /etc/ipsec.conf
@@ -26,4 +25,9 @@ ipsec > apt install -y libreswan
       <ip address left> <ip address right> : PSK "P@ssw0rd"
       " >> /
 systemctl start/restart/enable ipsec
-openvpn на OUT-CLI
+################openvpn################
+https://firstvds.ru/technology/ustanovka-openvpn - взять отсюда настойки и поменять последнюю команиду на ту что напсиана ниже
+
+openvpn --daemon --config /etc/openvpn/openvpn.conf
+
+ospf - сети gre и внутренние, на out-cli сети tun
