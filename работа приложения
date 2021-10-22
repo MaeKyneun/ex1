@@ -11,17 +11,15 @@ GPO - Core.wsr – создать новый(crt) – Comp… Win… Secu… Pub
 
 
 *******с Windows - Linux
-#Windows# - network AD CS (Cert Autho...)
+#Windows# - network AD CS (Cert Autho...) можно не писать
 сервер - настройки  - Exten > http (+ все галочки)
     exit module > настройки (галочка)
     revoked > publish > Delta only
 #Linux#
-west-front, east-front - nginx
-nginx.conf (upstream backennd {west-back(1-2) faile_timeout = 20sec, 
-                               east-back(1-2) faile_timeout = 20sec}
+nginx.conf (upstream backennd) faile_timeout = 20sec
             server_name app.wsr)
 firewalld (http, https)
-пейти в графику
+пейти в графику (можно без нее)
 в cmd 
     su > cd */conf.d > 
         openssl req -out csr.csr -new -newkey rsa:2048 -nodes -keyout server.key
@@ -31,6 +29,7 @@ firewalld (http, https)
 cp файл в /home/user/Docu*/certnew.cer
 в cmd cp /home/user/Docu*/certnew.cer */conf.d
     openssl x509 -inform DER -in /home/user/Downloads/certnew.cer -out */conf.d/server.crt
+******************** если без графики, то скачать nginx зайти в папку задать запрос на сертификат, отправить его в расшаренную папку, на DC открыть сайт и вставить туда данные, скаченный сертификат кинуть в расшаренную папку. в linux поменять с помощью команды расширение и рестартануть службу
 
-west-back(1-2), east-back(1-2) - apache httpd
+httpd
 index.html(приложение, которое дадут app.wsr)
