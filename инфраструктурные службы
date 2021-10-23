@@ -46,6 +46,7 @@ shares > C:/AdminShare (права для everyone)
 apt install samba-client cifs-utils
 mkdir /mnt/adminshare
 mount -t cifs -o username=Administrator,password=P@ssw0rd //<ip address DC>/AdminShare /mnt/adminshare
+можно добавить эту папку на другие linux машины, чтобы передавать сертификаты
 ####################центр сертификации####################
 ##DC
 установить роль AD CS - настроить при загрузке
