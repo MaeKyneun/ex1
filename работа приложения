@@ -11,14 +11,33 @@ GPO - Core.wsr – создать новый(crt) – Comp… Win… Secu… Pub
 
 
 *******с Windows - Linux
-#Windows# - network AD CS (Cert Autho...) можно не писать
+#Windows# - network AD CS (Cert Autho...) - можно не писать
 сервер - настройки  - Exten > http (+ все галочки)
     exit module > настройки (галочка)
     revoked > publish > Delta only
 #Linux#
-nginx.conf (upstream backennd) faile_timeout = 20sec
-            server_name app.wsr)
-firewalld (http, https)
+nginx.conf (upstream backennd {
+                server ip address:80 faile_timeout = 20sec;
+            }
+            server {
+                listen 80;
+                server_name app.wsr;
+                return 301 http://app.wsr$request_uri;
+            }
+            server {
+                listen 443 ssl;
+                server_name app.wsr;
+                ssl_certificate /etc/nginx/conf.d/server.crt;
+                ssl_certificate_key /etc/nginx/conf.d/server.key;
+                location / {
+                    proxy_pass http://backend;
+                    proxy_set_header Host $http_host;
+                }
+            })
+##firewalld (http, https)##
+firewall-cmd --add-service=http --permanent --zone=external
+firewall-cmd --add-service=https --permanent --zone=external
+
 пейти в графику (можно без нее)
 в cmd 
     su > cd */conf.d > 
