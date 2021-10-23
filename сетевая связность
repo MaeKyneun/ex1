@@ -3,7 +3,7 @@ nat - порты в ISP добавить в external
 через firewalld добавить интерфейсы в trusted(gre + int, которые ссмотрят в собственную сеть) и external (сервисы gre, ipsec, int,http, https, openvpn которые смотрять в gre)
 на некоторых машинах потребуетс выключить appormor, selinux
 
-gre+ipsec
+gre(int+/etc/N*/sys*/*)+ipsec
 
 ipsec > apt install -y libreswan
       /etc/ipsec.conf
