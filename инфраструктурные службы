@@ -47,6 +47,31 @@ apt install samba-client cifs-utils
 mkdir /mnt/adminshare
 mount -t cifs -o username=Administrator,password=P@ssw0rd //<ip address DC>/AdminShare /mnt/adminshare
 можно добавить эту папку на другие linux машины, чтобы передавать сертификаты
+###SRV
+install -y nfs*
+mkdir название_монтируемой папки
+vim /etc/exports
+папка <адрес ести/маска>(rw)
+
+systemctl restart nfs-server
+systemctl restart nfs-server
+
+firewall-cmd --add-service=ntp --zane=external --permanent
+###ntp client linux
+yum install -y nfs-common
+mkdir 
+mount -t nfs <ip srv>:/<кого монтируем> /куда - если работает то размонтируем и сделаем автоматически
+unmount /название
+apt install -y autofs
+
+vim /etc/autoi.master
+добавить строчку /куда /etc/auto.master --timeout=100
+
+vim /etc/auto.nfs
+share -fstype=nfs4,rw <ip srv>:/что монтируем
+
+systemctl restart autofs
+systemctl enable autofs
 ####################центр сертификации####################
 ##DC
 установить роль AD CS - настроить при загрузке
