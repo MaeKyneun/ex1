@@ -70,8 +70,16 @@ vim /etc/autoi.master
 vim /etc/auto.nfs
 share -fstype=nfs4,rw <ip srv>:/что монтируем
 
+*****vim /etc/fstab
+*****<ip srv>:/откуда /куда nfs auto,noatime,nolock,bg,nfsvers=3,intr,tcp,actimeo=1800 0 0
+
 systemctl restart autofs
 systemctl enable autofs
+*****firewall-cmd (nfs, mount, rpc-bind)
+####client nfs windows
+https://webnoob.ru/linux/klient-nfs-dlya-windows-10-professional-enterprise/
+
+**** https://winitpro.ru/index.php/2014/08/19/podklyuchaem-nfs-sharu-v-windows-server-2012-r2/
 ####################центр сертификации####################
 ##DC
 установить роль AD CS - настроить при загрузке
