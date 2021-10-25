@@ -26,7 +26,7 @@ firewall-cmd --add-service=ntp --permanent
 firewall-cmd --reload
 
 /etc/chrony/chrony.conf 
-server <ip address DC> #на всех машинах указываем адрес DC#
+server <ip address SRV> #на всех машинах указываем адрес SRV#
 
 chronyc tracking #проверить адрес сервера и, что там все не по 0#
 ###Windows client (all)
@@ -35,7 +35,7 @@ net stop & start w32tm
 w32tm /config /update
 w32tm /query /source
 ####################dhcp####################
-установить роль и настроить по заданию
+установить роль и настроить по заданию(firewall проверить + reservation) +  relay на FW (порты в trusted)
 проверить client
 ####################общий каталог####################
 ###DC
